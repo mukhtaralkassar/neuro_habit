@@ -1,17 +1,35 @@
-# neuro_habit
+# Neuro Habit
 
-A new Flutter project.
+A habit tracking app built with full clean architecture in Flutter. The focus is on simplicity — build habits, track them daily, and stay consistent.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Add custom habits with a title and mood tag
+- Toggle habit completion per day
+- Animated dashboard screen with a pulsing FAB button
+- Bottom sheet for adding new habits without leaving the screen
+- Offline-first: all data stored locally with Hive
 
-A few resources to get you started if this is your first Flutter project:
+## Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **State Management:** Cubit (flutter_bloc) with Equatable
+- **Local Storage:** Hive + hive_flutter
+- **Other:** UUID for unique habit IDs, cupertino_icons
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# neuro_habit
+## Architecture
+
+Clean Architecture with three layers:
+
+```
+lib/
+├── data/
+│   ├── models/         — HabitModel (serialization)
+│   ├── repositories/   — HabitRepositoryImpl
+│   └── data_sources/   — HabitLocalDataSourceImpl (Hive)
+├── domain/
+│   ├── entities/       — Habit
+│   ├── repositories/   — HabitRepository (abstract)
+└── presentation/
+    ├── cubit/          — HabitCubit, HabitState
+    └── screens/        — HabitDashboardScreen, AddHabitSheet
+```
